@@ -25,14 +25,15 @@ export const metadata: Metadata = {
     "Node.js",
     "Python",
     "Remote Developer",
-    "Tashkent",
   ],
   openGraph: {
     title: "Valijon — Full-Stack Developer",
     description:
       "Full-Stack Developer specializing in TypeScript, React/Next.js, Node.js, and Python.",
     type: "website",
+    url: "https://sv211.xyz",
   },
+  metadataBase: new URL("https://sv211.xyz"),
 };
 
 export default function RootLayout({
@@ -41,7 +42,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme"),d=t==="dark"||(t===null&&matchMedia("(prefers-color-scheme:dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
       >

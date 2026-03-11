@@ -2,32 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-  --muted: #737373;
-  --border: #e5e5e5;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #fafafa;
-    --muted: #a3a3a3;
-    --border: #262626;
-    --accent: #3b82f6;
-    --accent-hover: #60a5fa;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 5%;
+    --muted: 0 0% 45%;
+    --muted-foreground: 0 0% 55%;
+    --border: 0 0% 90%;
+    --accent: 221 83% 53%;
+    --accent-hover: 221 83% 45%;
+    --card: 0 0% 100%;
+    --card-hover: 0 0% 97%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 55%;
+    --muted-foreground: 0 0% 45%;
+    --border: 0 0% 15%;
+    --accent: 217 91% 60%;
+    --accent-hover: 217 91% 70%;
+    --card: 0 0% 7%;
+    --card-hover: 0 0% 10%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+@layer base {
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
+  }
+
+  ::selection {
+    @apply bg-[hsl(var(--accent))] text-white;
+  }
 }
 
-::selection {
-  background: var(--accent);
-  color: white;
+@layer utilities {
+  .text-muted {
+    color: hsl(var(--muted));
+  }
+  .text-accent {
+    color: hsl(var(--accent));
+  }
+  .border-default {
+    border-color: hsl(var(--border));
+  }
+  .bg-card {
+    background-color: hsl(var(--card));
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }

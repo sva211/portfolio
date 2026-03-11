@@ -1,3 +1,7 @@
+"use client";
+
+import { FadeIn, StaggerContainer, StaggerItem } from "./motion";
+
 const skillCategories = [
   {
     title: "Frontend",
@@ -43,32 +47,40 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-4xl px-6 py-20">
-      <h2 className="text-2xl font-bold mb-12 flex items-center gap-3">
-        <span className="text-[var(--accent)] font-mono text-lg">03.</span>
-        Skills
-        <span className="h-px flex-1 bg-[var(--border)]" />
-      </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section id="skills" className="mx-auto max-w-5xl px-6 py-24">
+      <FadeIn>
+        <h2 className="text-2xl font-bold mb-12 flex items-center gap-4">
+          <span className="text-accent font-mono text-base">03.</span>
+          Skills
+          <span className="h-px flex-1 bg-[hsl(var(--border))]" />
+        </h2>
+      </FadeIn>
+      <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {skillCategories.map((cat) => (
-          <div key={cat.title} className="space-y-3">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
-              {cat.title}
-            </h3>
-            <ul className="space-y-1.5">
-              {cat.skills.map((skill) => (
-                <li
-                  key={skill}
-                  className="text-sm text-[var(--muted)] flex items-center gap-2"
-                >
-                  <span className="text-[var(--accent)] text-xs">&#9656;</span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <StaggerItem key={cat.title}>
+            <div className="space-y-4">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-accent">
+                {cat.title}
+              </h3>
+              <ul className="space-y-2">
+                {cat.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="text-sm text-muted flex items-center gap-2.5 group"
+                  >
+                    <span className="text-accent text-[10px] opacity-60 group-hover:opacity-100 transition-opacity">
+                      &#9656;
+                    </span>
+                    <span className="group-hover:text-[hsl(var(--foreground))] transition-colors">
+                      {skill}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </section>
   );
 }
